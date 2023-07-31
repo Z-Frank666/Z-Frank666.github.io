@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>前缀和与差分 | Frank_z的个人博客</title><meta name="author" content="Frank_z"><meta name="copyright" content="Frank_z"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前缀和与差分前缀和前缀和的定义与作用前缀和，顾名思义就是一个序列的前缀之和，用数学领域的知识来描述，实际上等同于数列的前n项和。 对于一个数组：a1,a2,a3,…,an. 定义前缀和数组通项为s[i] &#x3D; a1+…+ai。 在此处需注意，两个数组都是以下标1为存储起点。 知其定义，首先介绍如何求前缀和数组： 1for(int i&#x3D;1;i&lt;&#x3D;n;i++)s[i]&#x3D;s[i-1]+a[">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前缀和与差分">
+<meta property="og:url" content="https://z-frank666.github.io/2023/07/31/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/index.html">
+<meta property="og:site_name" content="Frank_z的个人博客">
+<meta property="og:description" content="前缀和与差分前缀和前缀和的定义与作用前缀和，顾名思义就是一个序列的前缀之和，用数学领域的知识来描述，实际上等同于数列的前n项和。 对于一个数组：a1,a2,a3,…,an. 定义前缀和数组通项为s[i] &#x3D; a1+…+ai。 在此处需注意，两个数组都是以下标1为存储起点。 知其定义，首先介绍如何求前缀和数组： 1for(int i&#x3D;1;i&lt;&#x3D;n;i++)s[i]&#x3D;s[i-1]+a[">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z-frank666.github.io/img/bg1.4.jpg">
+<meta property="article:published_time" content="2023-07-31T13:39:42.209Z">
+<meta property="article:modified_time" content="2023-07-31T13:41:05.789Z">
+<meta property="article:author" content="Frank_z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z-frank666.github.io/img/bg1.4.jpg"><link rel="shortcut icon" href="/img/bg9.jpg"><link rel="canonical" href="https://z-frank666.github.io/2023/07/31/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '前缀和与差分',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-07-31 21:41:05'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+document.addEventListener('pjax:send', () => {
+  Pace.restart()
+})
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js/themes/blue/pace-theme-minimal.min.css"/><script src="https://cdn.jsdelivr.net/npm/pace-js/pace.min.js"></script><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/./img/bg9.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/./img/bg1.4.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="Frank_z的个人博客"><span class="site-name">Frank_z的个人博客</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章总览</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 链接</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></li></ul></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">前缀和与差分</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-31T13:39:42.209Z" title="发表于 2023-07-31 21:39:42">2023-07-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-31T13:41:05.789Z" title="更新于 2023-07-31 21:41:05">2023-07-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="前缀和与差分"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="前缀和与差分"><a href="#前缀和与差分" class="headerlink" title="前缀和与差分"></a>前缀和与差分</h1><h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><h3 id="前缀和的定义与作用"><a href="#前缀和的定义与作用" class="headerlink" title="前缀和的定义与作用"></a>前缀和的定义与作用</h3><p>前缀和，顾名思义就是一个序列的前缀之和，用数学领域的知识来描述，实际上等同于数列的前n项和。</p>
+<p>对于一个数组：a1,a2,a3,…,an.</p>
+<p>定义前缀和数组通项为s[i] &#x3D; a1+…+ai。</p>
+<p>在此处需注意，两个数组都是以下标1为存储起点。</p>
+<p>知其定义，首先介绍如何求前缀和数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)s[i]=s[i<span class="number">-1</span>]+a[i];</span><br></pre></td></tr></table></figure>
+
+<p>这一行代码是前缀和的精髓所在，如果使用朴素求法，即遍历得到每一项，那么每一项的计算复杂度都为O(n),而运用此种求法，能将复杂度降为O(1)。</p>
+<p>接下来需要知道前缀和在解决实际问题中能发挥什么作用。</p>
+<p>事实上，前缀和的应用情境相对狭窄，大致分为一维前缀和应用和二位前缀和应用。</p>
+<h3 id="一维前缀和应用"><a href="#一维前缀和应用" class="headerlink" title="一维前缀和应用"></a>一维前缀和应用</h3><p>一维前缀和应用，说白了就是能快速的求出已知序列的子序列之和，即任何子区间[l,r]的数之和，均可通过前缀和数组一次运算得到：</p>
+<p>S(l~r) &#x3D; S[r] - S[l-1]</p>
+<p>不妨与朴素算法相比较，朴素算法即遍历求法，实际上需进行多次加法。</p>
+<h3 id="二维前缀和应用"><a href="#二维前缀和应用" class="headerlink" title="二维前缀和应用"></a>二维前缀和应用</h3><p>二维前缀和应用，作用对象为二维数组，简单来说，是解决快速计算子矩阵之和的问题。</p>
+<p>对于子矩阵的和，朴素算法所做的是，两层循环遍历求和，而前缀和求法，和一维做法一样高效，一次计算即可求得任意子矩阵之和。</p>
+<p><img src="https://img1.imgtp.com/2023/07/31/O78Wrq36.png" alt="二维前缀和-1">.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//(x1,y1),(x2,y2)这一子矩阵之和为：</span></span><br><span class="line">Sum = S[x2,y2]−S[x1−<span class="number">1</span>,y2]−S[x2,y1−<span class="number">1</span>]+S[x1−<span class="number">1</span>,y1−<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>读者可以分析一下该算式每项所代表的区域。</p>
+<p>由该二维前缀和的思想，不难反推出二维前缀和的求法：</p>
+<p><img src="https://img1.imgtp.com/2023/07/31/Pikxbj3L.png" alt="二维前缀和-2">.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        s[i][j] = s[i<span class="number">-1</span>][j] + s[i][j<span class="number">-1</span>] + a[i][j] - s[i<span class="number">-1</span>][j<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><h3 id="差分的定义与作用"><a href="#差分的定义与作用" class="headerlink" title="差分的定义与作用"></a>差分的定义与作用</h3><p>差分的定义：对于原数组：a1,a2,…,an,构造差分数组：b1,b2,…,bn,使得a[i]&#x3D;b1+b2+…+bi</p>
+<p>即b数组与a数组的关系为：</p>
+<p>b1 &#x3D; a1;</p>
+<p>b2 &#x3D; a2-a1;</p>
+<p>b3 &#x3D; a3-a2;</p>
+<p>…</p>
+<p>bn &#x3D; an - a(n-1);</p>
+<p>细心的读者会发现：原数组实际上就是差分数组的前缀和数组。是的，正如你的猜测一样，前缀和与差分是一对可逆运算，这时候就有人联想能否用前缀和的求法来求差分数组，但进一步推敲就可知，差分数组b是未知量，无法逆运算构造，那么如何快速构造差分数组，以及差分数组有何应用场景，下面我将再从一维与二维差分展开</p>
+<h3 id="一维差分"><a href="#一维差分" class="headerlink" title="一维差分"></a>一维差分</h3><p>一维差分最为典型的应用情境我将结合一道例题：</p>
+<p><a target="_blank" rel="noopener" href="https://www.acwing.com/activity/content/problem/content/831/">https://www.acwing.com/activity/content/problem/content/831/</a></p>
+<p><img src="https://img1.imgtp.com/2023/07/31/PYAacKaV.png" alt="一维差分"></p>
+<p>由题意可知，对任意区间上的值进行给定次数变动，如果采取朴素算法，遍历的复杂度不言而喻，而差分方法则采取核心的insert方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> l,<span class="type">int</span> r,<span class="type">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    b[l]+=c;</span><br><span class="line">    b[r+<span class="number">1</span>]-=c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，最终我们需要的是变动后的原数组a，那么我们可以采用可逆思想，通过两步计算改变差分数组，再通过求前缀和得到结果数组。</p>
+<p>而这两行代码的含义可以逐步分析，第一行代码执行后通过前缀和所得结果数组其实相当于将l~n的数加c，因此需要将r+1到n减c，才可得到一次操作的要求。</p>
+<p>由此给出差分数组的构造如何调用insert函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)<span class="built_in">insert</span>(i,i,a[i]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="二维差分"><a href="#二维差分" class="headerlink" title="二维差分"></a>二维差分</h3><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/800/">https://www.acwing.com/problem/content/800/</a></p>
+<p><img src="https://img1.imgtp.com/2023/07/31/Kf1nAjio.png" alt="二维差分"></p>
+<p>二维差分的应用自然离不开矩阵。每次对某一子矩阵进行操作，不难由可逆思想构造出二维insert方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(<span class="type">int</span> x1,<span class="type">int</span> y1,<span class="type">int</span> x2,<span class="type">int</span> y2,<span class="type">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    b[x1][y1]+=c;</span><br><span class="line">    b[x2+<span class="number">1</span>][y1]-=c;</span><br><span class="line">    b[x1+<span class="number">1</span>][y2]-=c;</span><br><span class="line">    b[x2+<span class="number">1</span>][y2+<span class="number">1</span>]+=c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下图利于直观理解该过程：</p>
+<p><img src="https://img1.imgtp.com/2023/07/31/1eIyM8G3.png" alt="图解二维差分"></p>
+<p>最后给出二维差分数组的构造：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">insert</span>(i,j,i,j,a[i][j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结与思考"><a href="#总结与思考" class="headerlink" title="总结与思考"></a>总结与思考</h2><p>本篇内容是本人对前缀和与差分的一点拙见，事实上，前缀和与差分只能说是一种优异的处理手段，建议读者将二者的联系作为学习的重要突破口。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a target="_blank" rel="noopener" href="https://Z-Frank666.github.io">Frank_z</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://z-frank666.github.io/2023/07/31/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/">https://z-frank666.github.io/2023/07/31/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://Z-Frank666.github.io" target="_blank">Frank_z的个人博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/./img/bg1.4.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/07/31/%E6%95%B4%E6%95%B0%E4%BA%8C%E5%88%86/" title="整数二分"><img class="cover" src="/./img/bg7.webp" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">整数二分</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/./img/bg9.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Frank_z</div><div class="author-info__description">初识博客,欢迎大家访问交流</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">0</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Z-Frank666"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Z-frank666" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:445232231@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">正在自学python~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86"><span class="toc-number">1.</span> <span class="toc-text">前缀和与差分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C"><span class="toc-number">1.1.</span> <span class="toc-text">前缀和</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E7%BC%80%E5%92%8C%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%9C%E7%94%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">前缀和的定义与作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.2.</span> <span class="toc-text">一维前缀和应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E5%89%8D%E7%BC%80%E5%92%8C%E5%BA%94%E7%94%A8"><span class="toc-number">1.1.3.</span> <span class="toc-text">二维前缀和应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B7%AE%E5%88%86"><span class="toc-number">1.2.</span> <span class="toc-text">差分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E5%88%86%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%9C%E7%94%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">差分的定义与作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E7%BB%B4%E5%B7%AE%E5%88%86"><span class="toc-number">1.2.2.</span> <span class="toc-text">一维差分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E5%B7%AE%E5%88%86"><span class="toc-number">1.2.3.</span> <span class="toc-text">二维差分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%E4%B8%8E%E6%80%9D%E8%80%83"><span class="toc-number">1.3.</span> <span class="toc-text">总结与思考</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/07/31/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/" title="前缀和与差分"><img src="/./img/bg1.4.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前缀和与差分"/></a><div class="content"><a class="title" href="/2023/07/31/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/" title="前缀和与差分">前缀和与差分</a><time datetime="2023-07-31T13:39:42.209Z" title="发表于 2023-07-31 21:39:42">2023-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/31/%E6%95%B4%E6%95%B0%E4%BA%8C%E5%88%86/" title="整数二分"><img src="/./img/bg7.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="整数二分"/></a><div class="content"><a class="title" href="/2023/07/31/%E6%95%B4%E6%95%B0%E4%BA%8C%E5%88%86/" title="整数二分">整数二分</a><time datetime="2023-07-31T08:33:59.577Z" title="发表于 2023-07-31 16:33:59">2023-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/15/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%88%86%E6%B2%BB%E6%80%9D%E6%83%B3/" title="归并排序与分治思想"><img src="/./img/bg1.7.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="归并排序与分治思想"/></a><div class="content"><a class="title" href="/2023/07/15/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F%E4%B8%8E%E5%88%86%E6%B2%BB%E6%80%9D%E6%83%B3/" title="归并排序与分治思想">归并排序与分治思想</a><time datetime="2023-07-15T13:15:26.547Z" title="发表于 2023-07-15 21:15:26">2023-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/09/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%90%AF%E5%8A%A8%EF%BC%81/" title="个人博客，启动！"><img src="/./img/bg3.webp" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="个人博客，启动！"/></a><div class="content"><a class="title" href="/2023/07/09/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%8C%E5%90%AF%E5%8A%A8%EF%BC%81/" title="个人博客，启动！">个人博客，启动！</a><time datetime="2023-07-09T15:04:42.690Z" title="发表于 2023-07-09 23:04:42">2023-07-09</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/./img/bg1.4.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Frank_z</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
